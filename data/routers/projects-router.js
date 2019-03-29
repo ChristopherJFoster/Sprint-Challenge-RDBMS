@@ -22,6 +22,17 @@ router.post('/', async (req, res) => {
   }
 });
 
+router.get('/', async (req, res) => {
+  try {
+    const projects = await Projects.getProjects();
+    res.status(200).json(projects);
+  } catch (error) {
+    res.status(500).json({
+      error: `There was an error while retrieving the projects data. ${err}`
+    });
+  }
+});
+
 router.get('/:id', async (req, res) => {
   const { id } = req.params;
   try {

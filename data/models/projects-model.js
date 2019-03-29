@@ -5,6 +5,10 @@ const addProject = async project => {
   return db('projects').where({ id: newProject[0] });
 };
 
+const getProjects = () => {
+  return db('projects');
+};
+
 const getProject = id => {
   return db('projects')
     .leftJoin('actions', 'projects.id', 'actions.project_id')
@@ -23,5 +27,6 @@ const getProject = id => {
 
 module.exports = {
   addProject,
+  getProjects,
   getProject
 };

@@ -5,6 +5,11 @@ const addAction = async action => {
   return db('actions').where({ id: newAction[0] });
 };
 
+const getActions = () => {
+  return db('actions');
+};
+
 module.exports = {
-  addAction
+  addAction,
+  getActions
 };
