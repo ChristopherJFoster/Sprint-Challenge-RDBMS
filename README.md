@@ -32,10 +32,31 @@ This will be akin to the Web API that you built in the last sprint, only this ti
 
 Demonstrate your understanding of this week's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
-1. Explain the difference between `RDBMS` and `SQL`.
-1. Why do tables need a `primary key`?
-1. What is the name given to a table column that references the primary key on another table.
-1. What do we need in order to have a _many to many_ relationship between two tables.
+1. Explain the difference between RDBMS and SQL
+
+   An RDBMS is a relational database management system: software designed to, well, help manage relational databases. An RDBMS can help with creating and managing tables and columns, enforcing data types and relationships between different data, and selecting the data requested by the client. So far we’ve been using SQLite3 as our RDBMS, but I’ve heard we switch to PostgresSQL later to avoid compatibility issues between SQLite and Heroku.
+
+   SQL, or Structured Query Language, is a “plain-English”-style coding language we use to write instructions to (most) RDBMSs. SQL is used to create the structure of the database (tables, columns, relationships), as well as to perform CRUD ops on the data. SQL can be abstracted away (written for us) by a desktop app like SQLite Studio, or a JS library like knex.js.
+
+2. Why do tables need a primary key?
+
+   The primary key (PK) is the one column in a record (often an integer called ‘id’) that is guaranteed to to uniquely identify the record. A PK has at least two main purposes. First, it guarantees that no two records can be identical because at the very least their PKs will be different. While one _could_ use any unique column as a PK (‘username’, for example), this is a bad idea because it assumes that no one will ever come along later and change the unique property of that column (not to mention that the ‘username’ would have to be stored as a foreign key in other tables).
+
+   The second main purpose of PKs is to create links between records in different tables. In a one-to-many relationship, for example, a PK is used to link a single record in one table and multiple records in another. Let’s say there’s a students tables and a grades table. The grades table would reference the PK of the students table with a column that might be called ‘student_id’ - this is called a foreign key (FK). If student ‘Christopher Foster’ had a PK of 02334, then each grade record for that student would have a ‘student_id’ (FK) of 02334. Using a JOIN based on the number they have in common, an SQL SELECT could return the student ‘Christopher Foster’ and all that student’s grades.
+
+3. What is the name given to a table column that references the primary key on another table.
+
+   foreign key
+
+4. What do we need in order to have a many-to-many relationship between two tables.
+
+   It probably has different names, but we need a **junction table**: a table that contains a foreign key column for each of the two tables (though it may contain other columns as well). For example, most video games have multiple characters, and at least some characters appear in multiple video games. A game table and characters table would thus have a many-to-many relationship. A junction table might be called game_characters. The character Mario appears in Super Mario Bros. and Super Mario Bros. 2. Our game_characters table would contain one record for each game, like so:
+
+   id----character_id----game_id
+   8-----12--------------6------
+   29----12--------------18-----
+
+   id is the PK for this table (not required, but I feel more comfortable with a PK in every table). character_id is an FK for the characters table, and game_id is an FK for the games table. With these three tables we can select Mario (pulling additional data from the characters table if needed) while also selecting the games he has appeared in (again, pulling additional data from the games table as needed).
 
 ## Project Set Up
 
