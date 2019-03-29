@@ -11,8 +11,11 @@ exports.up = function(knex) {
       .onDelete('CASCADE')
       .onUpdate('CASCADE');
     tbl.string('actDesc', 128).notNullable();
-    tbl.string('actNotes');
-    tbl.boolean('actComp').notNullable();
+    tbl.string('actNotes').defaultTo('');
+    tbl
+      .boolean('actComp')
+      .notNullable()
+      .defaultTo(false);
   });
 };
 

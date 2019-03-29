@@ -1,9 +1,15 @@
 exports.up = function(knex) {
   return knex.schema.createTable('projects', tbl => {
     tbl.increments();
-    tbl.string('projName', 128).notNullable();
-    tbl.string('projDesc');
-    tbl.boolean('projComp').notNullable();
+    tbl
+      .string('projName', 128)
+      .notNullable()
+      .unique();
+    tbl.string('projDesc').defaultTo('');
+    tbl
+      .boolean('projComp')
+      .notNullable()
+      .defaultTo(false);
   });
 };
 

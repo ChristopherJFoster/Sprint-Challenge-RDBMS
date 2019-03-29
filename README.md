@@ -52,9 +52,10 @@ Demonstrate your understanding of this week's concepts by answering the followin
 
    It probably has different names, but we need a **junction table**: a table that contains a foreign key column for each of the two tables (though it may contain other columns as well). For example, most video games have multiple characters, and at least some characters appear in multiple video games. A game table and characters table would thus have a many-to-many relationship. A junction table might be called game_characters. The character Mario appears in Super Mario Bros. and Super Mario Bros. 2. Our game_characters table would contain one record for each game, like so:
 
-   id----character_id----game_id
-   8-----12--------------6------
-   29----12--------------18-----
+   |  id | character_id | game_id |
+   | --: | -----------: | ------: |
+   |   8 |           12 |       6 |
+   |  29 |           12 |      18 |
 
    id is the PK for this table (not required, but I feel more comfortable with a PK in every table). character_id is an FK for the characters table, and game_id is an FK for the games table. With these three tables we can select Mario (pulling additional data from the characters table if needed) while also selecting the games he has appeared in (again, pulling additional data from the games table as needed).
 
