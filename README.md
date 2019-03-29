@@ -32,7 +32,7 @@ This will be akin to the Web API that you built in the last sprint, only this ti
 
 Demonstrate your understanding of this week's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
-1. Explain the difference between RDBMS and SQL
+1. Explain the difference between RDBMS and SQL.
 
    An RDBMS is a relational database management system: software designed to, well, help manage relational databases. An RDBMS can help with creating and managing tables and columns, enforcing data types and relationships between different data, and selecting the data requested by the client. So far we’ve been using SQLite3 as our RDBMS, but I’ve heard we switch to PostgresSQL later to avoid compatibility issues between SQLite and Heroku.
 
@@ -44,11 +44,11 @@ Demonstrate your understanding of this week's concepts by answering the followin
 
    The second main purpose of PKs is to create links between records in different tables. In a one-to-many relationship, for example, a PK is used to link a single record in one table and multiple records in another. Let’s say there’s a students tables and a grades table. The grades table would reference the PK of the students table with a column that might be called ‘student_id’ - this is called a foreign key (FK). If student ‘Christopher Foster’ had a PK of 02334, then each grade record for that student would have a ‘student_id’ (FK) of 02334. Using a JOIN based on the number they have in common, an SQL SELECT could return the student ‘Christopher Foster’ and all that student’s grades.
 
-3. What is the name given to a table column that references the primary key on another table.
+3. What is the name given to a table column that references the primary key on another table?
 
    foreign key
 
-4. What do we need in order to have a many-to-many relationship between two tables.
+4. What do we need in order to have a many-to-many relationship between two tables?
 
    It probably has different names, but we need a **junction table**: a table that contains a foreign key column for each of the two tables (though it may contain other columns as well). For example, most video games have multiple characters, and at least some characters appear in multiple video games. A game table and characters table would thus have a many-to-many relationship. A junction table might be called game_characters. The character Mario appears in Super Mario Bros. and Super Mario Bros. 2. Our game_characters table would contain one record for each game, like so:
 
