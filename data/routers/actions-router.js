@@ -1,7 +1,6 @@
 const router = require('express').Router();
 
 const Actions = require('../models/actions-model');
-const Projects = require('../models/projects-model');
 
 router.post('/', async (req, res) => {
   const { project_id, actDesc } = req.body;
