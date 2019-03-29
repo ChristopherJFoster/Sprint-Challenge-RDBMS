@@ -38,16 +38,20 @@ router.get('/:id', async (req, res) => {
   try {
     const projActs = await Projects.getProject(id);
     if (projActs.length > 0) {
-      const { id, name, description, completed } = projActs[0];
+      const { id, name, description } = projActs[0];
+      let { completed } = projActs[0];
+      completed ? (completed = true) : (completed = false);
       const actions = projActs.map(action => {
         if (!action.actionId) {
           return 'Add some actions to your project!';
         } else {
+          let actComp;
+          action.actComp ? (actComp = true) : (actComp = false);
           return {
             id: action.actionId,
             description: action.actDesc,
             notes: action.actNotes,
-            completed: action.actComp
+            completed: actComp
           };
         }
       });
